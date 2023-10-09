@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.variosactivitys_guardardatos"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.variosactivitys_guardardatos"
@@ -32,6 +32,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+    buildFeatures{
+        viewBinding=true
     }
 }
 
