@@ -1,5 +1,5 @@
 package com.example.encuesta
 
-class Encuesta (nombre: String,sistema_operativo: String,especialidades:List<String>,horas_estudio:Int){
+data class Encuesta (val nombre: String,val sistema_operativo: String,val especialidades:List<String>,val horas_estudio:Int){
 
 }
