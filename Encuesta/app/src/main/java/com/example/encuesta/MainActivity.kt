@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
             }else if(!binding.rdbMac.isChecked && !binding.rdbWindows.isChecked && !binding.rdbLinux.isChecked){
                 Toast.makeText(this,"Elija un sistema operativo", Toast.LENGTH_SHORT).show()
             }else{
+                especialidades = listOf()
                 if(binding.swAnonimo.isChecked){
                     nombre = "Animo"
                 }else{
@@ -52,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                     SeekBar.OnSeekBarChangeListener {
                     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                         var progreso = binding.sbHoras.progress
-                        binding.txtNumHoras.setText(progreso.toInt())
+                        binding.txtNumHoras.setText(progreso.toString())
                     }
 
                     override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -64,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 })
 
-                var encuesta = Encuesta(nombre,sistema_operativo, especialidades,0)
+                var encuesta = Encuesta(nombre,sistema_operativo, especialidades,binding.sbHoras.progress)
                 listaEncuestas += encuesta
 
                 binding.edtNombre.setText("")
@@ -88,6 +89,10 @@ class MainActivity : AppCompatActivity() {
                 resumen += i.nombre +" "+ i.sistema_operativo + " " + i.especialidades + " " + i.horas_estudio + "\n"
             }
             binding.txtResumen.setText(resumen)
+        }
+
+        binding.btnReiniciar.setOnClickListener{
+            listaEncuestas = listOf()
         }
     }
 }
