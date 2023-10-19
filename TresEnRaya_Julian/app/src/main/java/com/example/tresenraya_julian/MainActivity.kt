@@ -3,6 +3,7 @@ package com.example.tresenraya_julian
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.view.isVisible
 import com.example.tresenraya_julian.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -15,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         var jugador: Int = 0
         var turno: Int = 0
         var terminado: Boolean = false
-        val tablero: Array<Array<Int>> = Array(3) { Array(3) { 0 } }
+        var tablero: Array<Array<Int>> = Array(3) { Array(3) { 0 } }
         val botones = arrayOf(
             arrayOf(binding.img00,binding.img01,binding.img02),
             arrayOf(binding.img10,binding.img11,binding.img12),
@@ -44,16 +45,31 @@ class MainActivity : AppCompatActivity() {
                             Toast.makeText(this, "¡¡Naranja gana!!", Toast.LENGTH_SHORT).show()
                         }
                         for (y in 0 until botones.size) {
-                            for (x in 0 until botones[0].size){
+                            for (x in 0 until botones[0].size) {
                                 botones[y][x].isClickable = false
                             }
                         }
+                        binding.btnReseteo.isVisible = true
+                    }
+                    if(turno > 8){
+                        Toast.makeText(this, "¡¡Empate!!", Toast.LENGTH_SHORT).show()
+                        binding.btnReseteo.isVisible = true
                     }
                 }
             }
         }
 
-
+        binding.btnReseteo.setOnClickListener{
+            for (y in 0 until botones.size) {
+                for (x in 0 until botones[0].size) {
+                    botones[y][x].isClickable = true
+                    botones[y][x].setImageResource(R.drawable.ic_circle_default)
+                }
+            }
+            binding.btnReseteo.isVisible = false
+            tablero = Array(3) { Array(3) { 0 } }
+            turno = 0
+        }
     }
 
     fun esGanador(tablero:Array<Array<Int>>,jugador:Int): Int{
@@ -72,7 +88,7 @@ class MainActivity : AppCompatActivity() {
 
     fun diagonales(tablero:Array<Array<Int>>,jugador:Int): Int{
         var k: Int = 0
-        var x: Int = 2
+        var x: Int = 0
         for(y in tablero.size - 1 .. 0){
             if(tablero[y][x]==jugador){
                 k++;
@@ -80,7 +96,7 @@ class MainActivity : AppCompatActivity() {
             if(k==3){
                 return jugador
             }
-            x--
+            x++
         }
         x = 0
         for(y in 0 until tablero.size){
