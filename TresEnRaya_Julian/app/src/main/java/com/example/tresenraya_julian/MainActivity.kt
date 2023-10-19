@@ -15,7 +15,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         var jugador: Int = 0
         var turno: Int = 0
-        var terminado: Boolean = false
+        var cont1: Int = 0
+        var cont2: Int = 0
         var tablero: Array<Array<Int>> = Array(3) { Array(3) { 0 } }
         val botones = arrayOf(
             arrayOf(binding.img00,binding.img01,binding.img02),
@@ -41,8 +42,12 @@ class MainActivity : AppCompatActivity() {
                     if (esGanador(tablero,jugador) != 0) {
                         if (jugador == 1) {
                             Toast.makeText(this, "¡¡Verde gana!!", Toast.LENGTH_SHORT).show()
+                            cont1++
+                            binding.txtcont1.text = cont1.toString()
                         } else {
                             Toast.makeText(this, "¡¡Naranja gana!!", Toast.LENGTH_SHORT).show()
+                            cont2++
+                            binding.txtcont2.text = cont2.toString()
                         }
                         for (y in 0 until botones.size) {
                             for (x in 0 until botones[0].size) {
@@ -89,7 +94,7 @@ class MainActivity : AppCompatActivity() {
     fun diagonales(tablero:Array<Array<Int>>,jugador:Int): Int{
         var k: Int = 0
         var x: Int = 0
-        for(y in tablero.size - 1 .. 0){
+        for(y in tablero.size .. 0){
             if(tablero[y][x]==jugador){
                 k++;
             }
