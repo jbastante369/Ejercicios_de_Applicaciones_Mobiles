@@ -149,12 +149,4 @@ class MainActivity : AppCompatActivity() {
 
         return 0
     }
-
-    /*fun partidaAcabada(){
-        for (y in 0 until botones.size){
-            for (x in 0 until botones[0].size){
-                botones[y][x].isClickable = false
-            }
-        }
-    }*/
 }
