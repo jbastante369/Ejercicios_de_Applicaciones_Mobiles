@@ -1,5 +1,7 @@
 package com.example.frutasrecyclerview
 
+import Modelo.AlmacenDeFrutas
+import Modelo.FactoriaListaFrutas
 import android.annotation.SuppressLint
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
@@ -22,8 +24,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Almacen.personajes = FactoriaListaPersonaje.generaLista(12)
-        Log.e("JBS", Almacen.personajes.toString())
+        AlmacenDeFrutas.frutas = FactoriaListaFrutas.generaLista(12)
+        Log.e("JBS", AlmacenDeFrutas.frutas.toString())
 
         miRecyclerView = binding.listaPersonajesRecycler as RecyclerView
         miRecyclerView.setHasFixedSize(true)//hace que se ajuste a lo que has diseñado
