@@ -1,5 +1,6 @@
 package com.example.frutasrecyclerview
 
+import Adaptadores.MiAdaptador
 import Modelo.AlmacenDeFrutas
 import Modelo.FactoriaListaFrutas
 import android.annotation.SuppressLint
@@ -27,14 +28,11 @@ class MainActivity : AppCompatActivity() {
         AlmacenDeFrutas.frutas = FactoriaListaFrutas.generaLista(12)
         Log.e("JBS", AlmacenDeFrutas.frutas.toString())
 
-        miRecyclerView = binding.listaPersonajesRecycler as RecyclerView
-        miRecyclerView.setHasFixedSize(true)//hace que se ajuste a lo que has diseñado
-        miRecyclerView.layoutManager = LinearLayoutManager(this)//se dice el tipo de Layout, dejampos este.
-        //esta es la clave. Creo un objeto de tipo Mi Adaptador y le paso la lista que he creado prevaimente más arriba.
-        //aquí, es donde inflará y pintará cada CardView.
-        var miAdapter = MiAdaptadorRecycler(Almacen.personajes, this)
-        //aquí es donde hace la "magia", al pasarle a mi Recicler View, el adaptador creado.
-        miRecyclerView.adapter = miAdapter
+        miRecyclerView = binding.listaFrutas as RecyclerView
+        miRecyclerView.setHasFixedSize(true)
+        miRecyclerView.layoutManager = LinearLayoutManager(this)
+        var miAdaptador = MiAdaptador(AlmacenDeFrutas.frutas, this)
+        miRecyclerView.adapter = miAdaptador
 
         contextoPrincipal = this
     }
