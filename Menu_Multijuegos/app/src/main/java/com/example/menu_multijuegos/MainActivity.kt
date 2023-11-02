@@ -38,21 +38,31 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.mnOp1 -> {
-                irATresEnRaya()
+                if(!binding.edtUsuario.text.isEmpty()){
+                    irATresEnRaya()
+                }else{
+                    Toast.makeText(this,"Mete un usuario", Toast.LENGTH_SHORT).show()
+                }
             }
             R.id.mnOp2 -> {
-                irASimonDice()
+                if(!binding.edtUsuario.text.isEmpty()){
+                    irASimonDice()
+                }else{
+                    Toast.makeText(this,"Mete un usuario", Toast.LENGTH_SHORT).show()
+                }
             }
         }
         return super.onOptionsItemSelected(item)
     }
     private val irATresEnRaya: () -> Unit = {
         val miIntent = Intent(this, TresEnRaya::class.java)
+        miIntent.putExtra("usuario",binding.edtUsuario.text.toString())
         startActivity(miIntent)
     }
 
     private val irASimonDice: () -> Unit = {
         val miIntent = Intent(this, SimonDice::class.java)
+        miIntent.putExtra("usuario",binding.edtUsuario.text.toString())
         startActivity(miIntent)
     }
 }

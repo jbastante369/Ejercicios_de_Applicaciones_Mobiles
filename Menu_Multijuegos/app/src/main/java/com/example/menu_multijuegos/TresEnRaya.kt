@@ -24,8 +24,10 @@ class TresEnRaya : AppCompatActivity() {
             arrayOf(binding.img20,binding.img21,binding.img22),
         )
 
+        var usuario = intent.getStringExtra("usuario")
+
         binding.tbTresEnRaya.title = "    Tres en raya"
-        binding.tbTresEnRaya.subtitle = "     Opcion1"
+        binding.tbTresEnRaya.subtitle = "     "+ usuario.toString()
         binding.tbTresEnRaya.setLogo(R.drawable.ic_logo)
 
         setSupportActionBar(binding.tbTresEnRaya)

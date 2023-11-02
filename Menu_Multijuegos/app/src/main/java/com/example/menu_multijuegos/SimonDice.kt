@@ -34,8 +34,10 @@ class SimonDice : AppCompatActivity() {
             "#000E6A",
             "#087800")
 
+        var usuario = intent.getStringExtra("usuario")
+
         binding.tbSimonDice.title = "    Simon dice"
-        binding.tbSimonDice.subtitle = "     Opcion2"
+        binding.tbSimonDice.subtitle = "     "+ usuario.toString()
         binding.tbSimonDice.setLogo(R.drawable.ic_logo)
 
         setSupportActionBar(binding.tbSimonDice)
