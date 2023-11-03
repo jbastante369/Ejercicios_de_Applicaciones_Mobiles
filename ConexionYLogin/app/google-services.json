@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "79958306618",
+    "project_id": "conexion-y-login-df42c",
+    "storage_bucket": "conexion-y-login-df42c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:79958306618:android:596ae9e7c2662385f96a03",
+        "android_client_info": {
+          "package_name": "com.example.conexionylogin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACQFQ-14yhpnc77cyHn5-Yk7UOLdu-T5A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
