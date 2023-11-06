@@ -1,5 +1,7 @@
 package com.example.menu_multijuegos
 
+import Auxiliar.Conexion
+import Modelo.Usuario
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,6 +14,7 @@ class SimonDice : AppCompatActivity() {
     lateinit var binding: ActivitySimonDiceBinding
 
     private var nivel = 1
+    private var nivelusuario = 1
     private var secuencia = mutableListOf<Int>()
     private var indiceUsuario = 0
     private var completado = true
@@ -33,8 +36,19 @@ class SimonDice : AppCompatActivity() {
             "#887B00",
             "#000E6A",
             "#087800")
-
         var usuario = intent.getStringExtra("usuario")
+        var u = Conexion.buscarUsuario(this, usuario.toString().trim())
+
+
+        if (u == null){
+            var u:Usuario = Usuario(usuario.toString(),1)
+            Conexion.addUsuario(this,u)
+            Toast.makeText(this,"Nuevo Usuario: "+ u.nombre, Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(this,"Bienvenido de vuelta "+ u.nombre, Toast.LENGTH_SHORT).show()
+            nivelusuario = u.nivel
+        }
+        binding.txtRecord.setText("Record: $nivelusuario")
 
         binding.tbSimonDice.title = "    Simon dice"
         binding.tbSimonDice.subtitle = "     "+ usuario.toString()
@@ -74,7 +88,7 @@ class SimonDice : AppCompatActivity() {
                 }
 
                 override fun onFinish() {
-                    habilitarClicsDelUsuario()
+                    habilitarClicsDelUsuario(u)
                 }
             }
             temporizador.start()
@@ -89,7 +103,7 @@ class SimonDice : AppCompatActivity() {
 
     }
 
-    private fun habilitarClicsDelUsuario() {
+    private fun habilitarClicsDelUsuario(u:Usuario?) {
         var textViews = arrayOf(binding.btnRojo,
             binding.btnAmarillo,
             binding.btnAzul,
@@ -110,6 +124,14 @@ class SimonDice : AppCompatActivity() {
                         binding.txtNivel.setText("Nivel $nivel")
                         desactivarClicks()
                         completado = true
+                        if (nivel > nivelusuario){
+                            if (u != null) {
+                                u.nivel = nivel
+                                Conexion.modUsuario(this,u.nombre,u)
+                                nivelusuario = nivel
+                                binding.txtRecord.setText("Record: $nivelusuario")
+                            }
+                        }
                     }
                 } else {
                     Toast.makeText(this, "¡Incorrecto! Inténtalo de nuevo.", Toast.LENGTH_SHORT).show()
