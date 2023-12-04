@@ -67,6 +67,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        binding.btnStorage.setOnClickListener {
+            val storageIntent = Intent(this, UsoStorage::class.java)
+            startActivity(storageIntent)
+        }
+
         //------------------ Login Google -------------------
         //------------------------------- -Autenticación Google --------------------------------------------------
         //se hace un signOut por si había algún login antes.
